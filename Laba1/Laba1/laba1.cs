@@ -8,37 +8,49 @@ namespace Laba
 {
     class Laba1
     {
-        public string input;
-        public static string filePathOutFinal = @"D:/My/Универ-МИРЭА/7 семестр/Защита ОП/laba1/textFileOut.txt";
+        public string inputText;
+        public static string filePathOutFinalCaesar = @"D:/My/Универ-МИРЭА/7 семестр/Защита ОП/laba1/textFileOutCaesar.txt";
+        public static string filePathOutFinalBigramm = @"D:/My/Универ-МИРЭА/7 семестр/Защита ОП/laba1/textFileOutBigramm.txt";
         public List<KeyValuePair<char, int>> charTextSorted = new List<KeyValuePair<char, int>>();
         public string encryptedString;
         public List<KeyValuePair<char, int>> charEncryptedSorted = new List<KeyValuePair<char, int>>();
-        public string decryptedString;
+        public string decryptedStringCaesar;
+        public Dictionary<int,string> bigramFreqSortedText = new Dictionary<int, string>();
+        public Dictionary<int, string> bigramFreqSortedEncrypted = new Dictionary<int, string>();
+        public string decryptedStringBigram;
 
         //Парсер для шифрования и дешифрования текста
         public void Parse(string filePath)
         {
-            input = System.IO.File.ReadAllText(filePath);
+            inputText = System.IO.File.ReadAllText(filePath);
+            inputText = inputText.ToLower(); //для упрощения будем работать только со строчными буквами
 
-            charTextSorted = CharFreqSorter(input);
-            encryptedString = Encrypter(input,3);
+            charTextSorted = CharFreqSorter(inputText);
+            encryptedString = Encrypter(inputText,3);
             charEncryptedSorted = CharFreqSorter(encryptedString);
-            decryptedString = Decrypter(encryptedString, charTextSorted, charEncryptedSorted);
+            decryptedStringCaesar = Decrypter(encryptedString, charTextSorted, charEncryptedSorted);
 
-            StreamWriter sr1 = new StreamWriter(filePathOutFinal, false);
-            sr1.Write(decryptedString);
+            bigramFreqSortedText = BigramFreqSorter(inputText);
+            bigramFreqSortedEncrypted = BigramFreqSorter(encryptedString);
+            decryptedStringBigram = DecrypterBigram(encryptedString, bigramFreqSortedText, bigramFreqSortedEncrypted);
+
+            StreamWriter sr1 = new StreamWriter(filePathOutFinalCaesar, false);
+            sr1.Write(decryptedStringCaesar);
             sr1.Close();
 
-            //Console.WriteLine("============= Input text ============= \n");
-            //Console.WriteLine(input + "\n");
-            //Console.WriteLine("============= Encrypted text ============= \n");
-            //Console.WriteLine(encryptedString + "\n");
-            //Console.WriteLine("============= Final text ============= \n");
-            //Console.WriteLine(decryptedString + "\n");
+            StreamWriter sr2 = new StreamWriter(filePathOutFinalBigramm, false);
+            sr2.Write(decryptedStringBigram);
+            sr2.Close();
 
-            Console.WriteLine(BiEncrypter(input));
+            Console.WriteLine("============= Input text ============= \n");
+            Console.WriteLine(inputText + "\n");
+            Console.WriteLine("============= Encrypted text ============= \n");
+            Console.WriteLine(encryptedString + "\n");
+            Console.WriteLine("============= Final text ============= \n");
+            Console.WriteLine(decryptedStringCaesar + "\n");
         }
 
+        //Подсчет кол-ва каждого из символов в тексте
         public List<KeyValuePair<char,int>> CharFreqSorter(string text)
         {
             Dictionary<char, int> charFrequency = new Dictionary<char, int>();
@@ -48,7 +60,6 @@ namespace Laba
             {
                 if ((int)ch < 1040 || (int)ch > 1103)
                     continue;
-                //var lowerCh = Char.ToLower(ch);
                 if (charFrequency.ContainsKey(ch))
                 {
                     charFrequency[ch]++;
@@ -69,6 +80,7 @@ namespace Laba
             return charFrequencySorted;
         }
 
+        //Шифр Цезаря
         public string Encrypter(string input, int shift)
         {
             var encryptedString = "";
@@ -88,20 +100,11 @@ namespace Laba
                     else
                         encryptedString += Convert.ToChar(Convert.ToInt16(input[i]) + shift);
                 }
-                //Прописные буквы
-                if ((Convert.ToInt16(input[i]) >= 1040) && (Convert.ToInt16(input[i]) <= 1071))
-                {
-                    //Если буква, после сдвига выходит за пределы алфавита
-                    if (Convert.ToInt16(input[i]) + shift > 1071)
-                        encryptedString += Convert.ToChar(Convert.ToInt16(input[i]) + shift - 32);
-                    //Если буква может быть сдвинута в пределах алфавита
-                    else
-                        encryptedString += Convert.ToChar(Convert.ToInt16(input[i]) + shift);
-                }
             }
             return encryptedString;
         }
 
+        //Расшифровка на основании частоты повторения букв в изначальном и зашифрованом текстах
         public string Decrypter(string input, List<KeyValuePair<char, int>> originalCharFreq, List<KeyValuePair<char, int>> encryptedCharFreq)
         {
             string decryptedString = "";
@@ -141,34 +144,95 @@ namespace Laba
             return decryptedString;
         }
 
-        public string BiEncrypter(string input)
+        //Подсчет биграмм в тексте
+        public Dictionary<int, string> BigramFreqSorter(string input)
         {
-            var encryptedString = "";
-            Dictionary<int,string> dict = new Dictionary<int, string>();
-            input = input.ToLower();
+            var dict = new Dictionary<int, string>();
+            var index = 0;
+            char a = ' ';
+            char b = ' ';
 
             for (int i = 0; i < input.Length; i++)
             {
-                //Проверка на кириллицу
-                if (((int)(input[i]) < 1040) || ((int)(input[i]) > 1103))
-                    encryptedString += input[i];
                 //Строчные буквы
                 if ((Convert.ToInt16(input[i]) >= 1072) && (Convert.ToInt16(input[i]) <= 1103))
                 {
-                    var a = input[i];
-                    if ((i+1) >= input.Length)
+                    if (((i+1) < input.Length))
                     {
-                        
+                        if ((Convert.ToInt16(input[i + 1]) >= 1072) && (Convert.ToInt16(input[i + 1]) <= 1103))
+                        {
+                            a = input[i];
+                            b = input[i + 1];
+                        }
+                        var c = String.Concat(a, b);
+                        if (!dict.ContainsValue(c))
+                        {
+                            dict[index++] = c;
+                        }
                     }
-                    var b = input[i+1];
-                    if ()
+                    else
                     {
-
+                        break;
                     }
                 }
             }
 
-            return encryptedString;
+            return dict;
+        }
+
+        //Расшифровка для биграмм
+        private string DecrypterBigram(string input, Dictionary<int, string> bigramFreqSortedText, Dictionary<int, string> bigramFreqSortedEncrypted)
+        {
+            string decryptedString = "";
+            List<KeyValuePair<int, string>> _bigramFreqSortedText = new List<KeyValuePair<int, string>>();
+            List<KeyValuePair<int, string>> _bigramFreqSortedEncrypted = new List<KeyValuePair<int, string>>();
+            char a = ' ';
+            char b = ' ';
+
+            var i = 0;
+            foreach (var el in bigramFreqSortedText)
+            {
+                var newEl = el.Value;
+                KeyValuePair<int, string> newElDict = new KeyValuePair<int, string>(i++, newEl);
+                _bigramFreqSortedText.Add(newElDict);
+            }
+
+            i = 0;
+            foreach (var el in bigramFreqSortedEncrypted)
+            {
+                var newEl = el.Value;
+                KeyValuePair<int, string> newElDict = new KeyValuePair<int, string>(i++, newEl);
+                _bigramFreqSortedEncrypted.Add(newElDict);
+            }
+
+            for (int s = 0; s < input.Length; s++)
+            {
+                //Проверка на кириллицу
+                if (((int)(input[s]) < 1040) || ((int)(input[s]) > 1103))
+                    decryptedString += input[s];
+                //Подстановка в шифровынный текст букв на основе количества повторений в оригинале
+                if ((Convert.ToInt16(input[s]) >= 1040) && (Convert.ToInt16(input[s]) <= 1103))
+                {
+                    if (((s + 1) < input.Length))
+                    {
+                        if ((Convert.ToInt16(input[s + 1]) >= 1072) && (Convert.ToInt16(input[s + 1]) <= 1103))
+                        {
+                            a = input[s];
+                            b = input[s + 1];
+                            var sBi = String.Concat(a, b);
+
+                            var eKey = _bigramFreqSortedEncrypted.SingleOrDefault(x => x.Value == sBi).Key;
+                            var oBi = _bigramFreqSortedText.SingleOrDefault(x => x.Key == eKey).Value;
+                            decryptedString += oBi;
+                        }
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+            }
+            return decryptedString;
         }
     }
 }
