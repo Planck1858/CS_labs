@@ -9,9 +9,9 @@ namespace Laba
     class Laba1
     {
         public string inputText;
-        public static string filePathOutFinalCaesar = @"D:/My/Универ-МИРЭА/7 семестр/Защита ОП/laba1/textFileOutCaesar.txt";
-        public static string filePathOutFinalBigramm = @"D:/My/Универ-МИРЭА/7 семестр/Защита ОП/laba1/textFileOutBigramm.txt";
-        public static string FilePathTextChapter = @"D:/My/Универ-МИРЭА/7 семестр/Защита ОП/laba1/textFile.txt"; //глава Войны и Мира
+        public static string filePathOutFinalCaesar = @"../textFileOutCaesar.txt";
+        public static string filePathOutFinalBigramm = @"../textFileOutBigramm.txt";
+        public static string FilePathTextChapter = @"../textFile.txt"; //глава Войны и Мира
         public List<KeyValuePair<char, int>> charTextSorted = new List<KeyValuePair<char, int>>();
         public string encryptedString;
         public List<KeyValuePair<char, int>> charEncryptedSorted = new List<KeyValuePair<char, int>>();
@@ -44,13 +44,6 @@ namespace Laba
             StreamWriter sr2 = new StreamWriter(filePathOutFinalBigramm, false);
             sr2.Write(decryptedStringBigram);
             sr2.Close();
-
-            //Console.WriteLine("============= Input text ============= \n");
-            //Console.WriteLine(inputText + "\n");
-            //Console.WriteLine("============= Encrypted text ============= \n");
-            //Console.WriteLine(encryptedString + "\n");
-            //Console.WriteLine("============= Final text ============= \n");
-            //Console.WriteLine(decryptedStringCaesar + "\n");
         }
 
         //Подсчет кол-ва каждого из символов в тексте

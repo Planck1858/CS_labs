@@ -20,3 +20,14 @@ C:\Users\Dmitry\source\repos\POI_labs\Laba1\Laba1\obj\Debug\netcoreapp2.2\Laba1.
 C:\Users\Dmitry\source\repos\POI_labs\Laba1\Laba1\obj\Debug\netcoreapp2.2\Laba1.AssemblyInfo.cs
 C:\Users\Dmitry\source\repos\POI_labs\Laba1\Laba1\obj\Debug\netcoreapp2.2\Laba1.dll
 C:\Users\Dmitry\source\repos\POI_labs\Laba1\Laba1\obj\Debug\netcoreapp2.2\Laba1.pdb
+C:\Users\Dmitry\source\repos\POI_labs\Labs C# - 1\Laba1\Laba1\bin\Debug\netcoreapp2.2\Laba1.deps.json
+C:\Users\Dmitry\source\repos\POI_labs\Labs C# - 1\Laba1\Laba1\bin\Debug\netcoreapp2.2\Laba1.runtimeconfig.json
+C:\Users\Dmitry\source\repos\POI_labs\Labs C# - 1\Laba1\Laba1\bin\Debug\netcoreapp2.2\Laba1.runtimeconfig.dev.json
+C:\Users\Dmitry\source\repos\POI_labs\Labs C# - 1\Laba1\Laba1\bin\Debug\netcoreapp2.2\Laba1.dll
+C:\Users\Dmitry\source\repos\POI_labs\Labs C# - 1\Laba1\Laba1\bin\Debug\netcoreapp2.2\Laba1.pdb
+C:\Users\Dmitry\source\repos\POI_labs\Labs C# - 1\Laba1\Laba1\obj\Debug\netcoreapp2.2\Laba1.csprojAssemblyReference.cache
+C:\Users\Dmitry\source\repos\POI_labs\Labs C# - 1\Laba1\Laba1\obj\Debug\netcoreapp2.2\Laba1.csproj.CoreCompileInputs.cache
+C:\Users\Dmitry\source\repos\POI_labs\Labs C# - 1\Laba1\Laba1\obj\Debug\netcoreapp2.2\Laba1.AssemblyInfoInputs.cache
+C:\Users\Dmitry\source\repos\POI_labs\Labs C# - 1\Laba1\Laba1\obj\Debug\netcoreapp2.2\Laba1.AssemblyInfo.cs
+C:\Users\Dmitry\source\repos\POI_labs\Labs C# - 1\Laba1\Laba1\obj\Debug\netcoreapp2.2\Laba1.dll
+C:\Users\Dmitry\source\repos\POI_labs\Labs C# - 1\Laba1\Laba1\obj\Debug\netcoreapp2.2\Laba1.pdb

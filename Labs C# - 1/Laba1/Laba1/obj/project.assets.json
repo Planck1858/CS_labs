@@ -692,11 +692,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Dmitry\\source\\repos\\POI_labs\\Laba1\\Laba1\\Laba1.csproj",
+      "projectUniqueName": "C:\\Users\\Dmitry\\source\\repos\\POI_labs\\Labs C# - 1\\Laba1\\Laba1\\Laba1.csproj",
       "projectName": "Laba1",
-      "projectPath": "C:\\Users\\Dmitry\\source\\repos\\POI_labs\\Laba1\\Laba1\\Laba1.csproj",
+      "projectPath": "C:\\Users\\Dmitry\\source\\repos\\POI_labs\\Labs C# - 1\\Laba1\\Laba1\\Laba1.csproj",
       "packagesPath": "C:\\Users\\Dmitry\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Dmitry\\source\\repos\\POI_labs\\Laba1\\Laba1\\obj\\",
+      "outputPath": "C:\\Users\\Dmitry\\source\\repos\\POI_labs\\Labs C# - 1\\Laba1\\Laba1\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
