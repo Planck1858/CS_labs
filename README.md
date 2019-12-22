@@ -10,7 +10,7 @@ My lab projects for university - "Computer security" subject
 # Lab 2 - JS
 **Diffie-Hellman Protocol Implementation**
 
-*How to run lab 2 and lab 3
+*How to run lab 2 and lab 3*  
 Just enter this in app folder:
 ```
 npm i
@@ -24,7 +24,7 @@ nodemon lab2.js // or lab3.js
 # Lab 4 - Py
 **SRP-6a protocol implementation**
    
-*How to run
+*How to run*  
 Just enter this in app folder:
 ```
 python server.py
